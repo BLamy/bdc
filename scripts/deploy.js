@@ -19,19 +19,19 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const Token = await ethers.getContractFactory("Token");
-  const token = await Token.deploy();
-  await token.deployed();
+  const BillionDollarCalendar = await ethers.getContractFactory("BillionDollarCalendar");
+  const billionDollarCalendar = await BillionDollarCalendar.deploy();
+  await billionDollarCalendar.deployed();
 
-  console.log("Token address:", token.address);
+  console.log("BillionDollarCalendar address:", billionDollarCalendar.address);
 
   // We also save the contract's artifacts and address in the frontend directory
-  saveFrontendFiles(token);
+  saveFrontendFiles(billionDollarCalendar);
 }
 
-function saveFrontendFiles(token) {
+function saveFrontendFiles(billionDollarCalendar) {
   const fs = require("fs");
-  const contractsDir = __dirname + "/../frontend/src/contracts";
+  const contractsDir = __dirname + "/../frontend/contracts";
 
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
@@ -39,14 +39,14 @@ function saveFrontendFiles(token) {
 
   fs.writeFileSync(
     contractsDir + "/contract-address.json",
-    JSON.stringify({ Token: token.address }, undefined, 2)
+    JSON.stringify({ BillionDollarCalendar: billionDollarCalendar.address }, undefined, 2)
   );
 
-  const TokenArtifact = artifacts.readArtifactSync("Token");
+  const BillionDollarCalendarArtifact = artifacts.readArtifactSync("BillionDollarCalendar");
 
   fs.writeFileSync(
-    contractsDir + "/Token.json",
-    JSON.stringify(TokenArtifact, null, 2)
+    contractsDir + "/BillionDollarCalendar.json",
+    JSON.stringify(BillionDollarCalendarArtifact, null, 2)
   );
 }
 
