@@ -284,7 +284,11 @@ nov15,
     // This method sends an ethereum transaction to transfer tokens.
   // While this action is specific to this application, it illustrates how to
   // send a transaction.
-  async _buyDate(month, day, year) {
+  async _buyDate(month, day, year, bitmap) {
+    console.log(bitmap)
+    const nonTransparentBitmap = bitmap.map(row => row.map(x => x || "#FFF").join('')).join("").replace(/#/g, "");
+    console.log(nonTransparentBitmap)
+
     // Sending a transaction is a complex operation:
     //   - The user can reject it
     //   - It can fail before reaching the ethereum network (i.e. if the user
@@ -306,7 +310,7 @@ nov15,
 
       // We send the transaction, and save its hash in the Dapp's state. This
       // way we can indicate that we are waiting for it to be mined.
-      const tx = await this._calendar.buyDate(month, day, year, 123123123);
+      const tx = await this._calendar.buyDate(month, day, year, nonTransparentBitmap);
       this.setState({ txBeingSent: tx.hash });
 
       // We use .wait() to wait for the transaction to be mined. This method

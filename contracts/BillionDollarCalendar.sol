@@ -45,7 +45,7 @@ contract BillionDollarCalendar {
         // The address of the person who owns this date square
         address owner;
         // The bit map data to draw on the date square
-        uint256 bitmapData;
+        string bitmapData;
     }
 
     // An address type variable is used to store ethereum accounts.
@@ -64,7 +64,7 @@ contract BillionDollarCalendar {
         uint8 month,
         uint8 day,
         uint16 year,
-        uint256 bitmapData
+        string memory bitmapData
     ) public {
         require(isValidDate(month, day, year), "Must be valid date");
         string memory key = string(
@@ -84,7 +84,7 @@ contract BillionDollarCalendar {
         uint8 month,
         uint8 day,
         uint16 year,
-        uint256 bitmapData,
+        string memory bitmapData,
         address toAddress
     ) public {
         require(isValidDate(month, day, year), "Must be valid date");

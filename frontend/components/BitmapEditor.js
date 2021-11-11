@@ -14,9 +14,13 @@ const Pixel = styled.div`
   height: 19px;
   line-height: 19px;
   border-right: ${(props) =>
-    props.isGridVisible ? `1px dotted ${BORDER_COLOR}` : "1px solid transparent"};
+    props.isGridVisible
+      ? `1px dotted ${BORDER_COLOR}`
+      : "1px solid transparent"};
   border-bottom: ${(props) =>
-    props.isGridVisible ? `1px dotted ${BORDER_COLOR}` : "1px solid transparent"};
+    props.isGridVisible
+      ? `1px dotted ${BORDER_COLOR}`
+      : "1px solid transparent"};
   background-color: ${(props) => props.backgroundColor};
 `;
 
@@ -33,8 +37,11 @@ const Card = styled.div`
 `;
 
 const GridWrapper = styled.div`
-  border: ${props => props.isBorderVisible ? `1px dotted ${BORDER_COLOR}` : "1px solid transparent"};
-`
+  border: ${(props) =>
+    props.isBorderVisible
+      ? `1px dotted ${BORDER_COLOR}`
+      : "1px solid transparent"};
+`;
 
 // Hook to track if the user is holding the mouse down.
 const useIsMouseDown = () => {
@@ -55,15 +62,17 @@ const useIsMouseDown = () => {
 };
 
 // Hook to make setting nested state in our matrix easier.
-const useGridState = (defaultState) => {
+const useGridState = (defaultState, onChange) => {
   const [state, setState] = useState(defaultState);
   const resetMatrix = () => setState(defaultState);
   const setCell = (row, column, value) => {
-    setState([
+    const newState = [
       ...state.slice(0, row),
       [...state[row].slice(0, column), value, ...state[row].slice(column + 1)],
       ...state.slice(row + 1),
-    ]);
+    ];
+    setState(newState);
+    onChange(newState);
   };
 
   return [state, setCell, resetMatrix];
@@ -75,17 +84,20 @@ const useColorManager = (defaultColor) => {
   const [lastValidColor, setLastValidColor] = useState(defaultColor);
   const setColorWrapper = (newColor) => {
     setRawColorText(newColor);
-    if (/#(?:[0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})/.test(newColor)){
+    if (/#[0-9A-Fa-f]{3}/.test(newColor)) {
       setLastValidColor(newColor);
     }
-  }
-  return [lastValidColor, setColorWrapper, rawColorText]
-}
+  };
+  return [lastValidColor, setColorWrapper, rawColorText];
+};
 
-export const BitmapEditor = () => {
+export const BitmapEditor = ({ children, onChange }) => {
   const [isGridVisible, setIsGridVisible] = useState(true);
   const [activeColor, setActiveColor, rawColorText] = useColorManager("#000");
-  const [state, setPixelColor, resetMatrix] = useGridState(emptyMatrix);
+  const [state, setPixelColor, resetMatrix] = useGridState(
+    emptyMatrix,
+    onChange
+  );
   const isMouseDown = useIsMouseDown();
 
   return (
@@ -115,16 +127,20 @@ export const BitmapEditor = () => {
           <button onClick={resetMatrix}>Clear</button>
         </Card>
         <Card>
-          <button onClick={() => setActiveColor("#FF0000")}>Red</button>
-          <button onClick={() => setActiveColor("#0000FF")}>Blue</button>
-          <button onClick={() => setActiveColor("#00FF00")}>Green</button>
-          <input onChange={e => setActiveColor(e.target.value)} value={rawColorText} />
+          <button onClick={() => setActiveColor("#F00")}>Red</button>
+          <button onClick={() => setActiveColor("#00F")}>Blue</button>
+          <button onClick={() => setActiveColor("#0F0")}>Green</button>
+          <input
+            onChange={(e) => setActiveColor(e.target.value)}
+            value={rawColorText}
+          />
         </Card>
         <Card>
           <button onClick={() => setIsGridVisible(!isGridVisible)}>
             Toggle Grid
           </button>
         </Card>
+        <Card>{children}</Card>
       </div>
     </Flex>
   );
