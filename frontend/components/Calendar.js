@@ -96,9 +96,9 @@ const CalendarCell = ({ month, day, year, web3, onClick }) => {
     const res = await web3?.dateOwners(`${month}/${day}/${year}`);
     if (res?.owner) {
       setOwner(res.owner);
-      const bitmapData = res.bitmapData.match(/.{1,3}/g);
-      if (bitmapData?.length) {
-        setBitmap(chunk(bitmapData, MATRIX_SIZE));
+      const tokenURI = res.tokenURI.match(/.{1,3}/g);
+      if (tokenURI?.length) {
+        setBitmap(chunk(tokenURI, MATRIX_SIZE));
       }
     }
   }, [month, day, year, web3]); // TODO figure out how to rerun this effect when tx is complete for cell that was bought
