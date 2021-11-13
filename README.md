@@ -1,5 +1,5 @@
 # Hardhat Hackathon Boilerplate
-![ScreenFlow](https://user-images.githubusercontent.com/324928/141628871-ad2b3fe0-0bad-416d-bf87-a9f49d5e2905.gif)
+![ScreenFlow](https://user-images.githubusercontent.com/324928/141642456-2d3c511e-2837-4b48-8e9a-a9457878bf79.gif)
 
 This repository contains a sample project that you can use as the starting point
 for your Ethereum project. It's also a great fit for learning the basics of
