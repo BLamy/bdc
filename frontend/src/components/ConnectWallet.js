@@ -13,15 +13,38 @@ export function ConnectWallet({ connectWallet, networkError, dismiss }) {
           )}
         </div>
         <div className="p-4 text-center">
-          <h1>Please connect to your wallet to get started.</h1>
+          <span
+            style={{
+              position: "absolute",
+            }}
+          >
+            <div
+              style={{
+                position: "relative",
+                left: 180,
+                color: "#F44336",
+                backgroundColor: "F44336",
+                border: "2px solid #F44336",
+                paddingLeft: 4,
+                paddingRight: 4,
+                borderRadius: 4,
+                lineHeight: "18px",
+                fontWeight: "bold",
+              }}
+            >
+              Beta
+            </div>
+          </span>
+          <h2>BillionDollarCalendar.com</h2>
+          <h2>Own a piece of history!</h2>
           <button
             style={{
-                borderColor: "#F44336",
-                backgroundColor: "#F44331",
-                padding: 20,
-                color: "white",
-                fontWeight: "bold",
-                marginTop: 20,
+              borderColor: "#F44336",
+              backgroundColor: "#F44331",
+              padding: 20,
+              color: "white",
+              fontWeight: "bold",
+              margin: 20,
             }}
             className="btn"
             type="button"
@@ -29,6 +52,9 @@ export function ConnectWallet({ connectWallet, networkError, dismiss }) {
           >
             Connect Metamask Wallet
           </button>
+          <h4>
+            Please connect to an ethereum wallet using metamask to get started.
+          </h4>
         </div>
 
         <div className="p-4">
