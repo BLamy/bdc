@@ -31,7 +31,7 @@ async function main() {
 
 function saveFrontendFiles(billionDollarCalendar) {
   const fs = require("fs");
-  const contractsDir = __dirname + "/../frontend/contracts";
+  const contractsDir = __dirname + "/../frontend/src/contracts";
 
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
