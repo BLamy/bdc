@@ -373,15 +373,15 @@ nov15,
 
   // This method checks if Metamask selected network is Localhost:8545 
   _checkNetwork() {
-    if (window.ethereum.networkVersion === HARDHAT_NETWORK_ID) {
+    // if (window.ethereum.networkVersion === HARDHAT_NETWORK_ID) {
       return true;
-    }
+    // }
 
-    this.setState({ 
-      networkError: 'Please connect Metamask to Localhost:8545'
-    });
+    // this.setState({ 
+    //   networkError: 'Please connect Metamask to Localhost:8545'
+    // });
 
-    return false;
+    // return false;
   }
 }
 
